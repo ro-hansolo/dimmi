@@ -45,7 +45,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = ({
           disabled={disabled || isUpdating}
           onChange={(e) => onChange(e.target.checked)}
         />
-        <div className="relative w-8 h-[19px] rounded-full bg-fill shadow-[inset_0_0_0_0.5px_rgba(0,0,0,0.06)] transition-colors duration-200 peer-checked:bg-accent peer-focus-visible:ring-[3px] peer-focus-visible:ring-accent/40 peer-disabled:opacity-50 after:content-[''] after:absolute after:top-[1.5px] after:start-[1.5px] after:h-4 after:w-4 after:rounded-full after:bg-white after:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_0_0.5px_rgba(0,0,0,0.05)] after:transition-transform after:duration-200 peer-checked:after:translate-x-[13px] rtl:peer-checked:after:-translate-x-[13px]"></div>
+        <div className="mac-switch"></div>
       </label>
       {isUpdating && (
         <div className="absolute inset-0 flex items-center justify-center">

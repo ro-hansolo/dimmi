@@ -237,7 +237,7 @@ export const ModelsSettings: React.FC = () => {
     <div className="max-w-3xl w-full mx-auto space-y-4">
       <div>
         <h1 className="sr-only">{t("settings.models.title")}</h1>
-        <p className="text-[11px] leading-[14px] text-secondary px-0.5">
+        <p className="text-[11px] leading-[14px] text-secondary px-[10px]">
           {t("settings.models.description")}
         </p>
       </div>
@@ -260,7 +260,7 @@ export const ModelsSettings: React.FC = () => {
         {/* Downloaded Models Section — header always visible so filter stays accessible */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-[13px] leading-4 font-semibold text-text px-0.5">
+            <h2 className="text-[13px] leading-4 font-semibold text-text px-[10px]">
               {t("settings.models.yourModels")}
             </h2>
             <div className="flex items-center gap-2">
@@ -421,7 +421,7 @@ export const ModelsSettings: React.FC = () => {
         {/* Available Models Section */}
         {availableModels.length > 0 && (
           <div className="space-y-3">
-            <h2 className="text-[13px] leading-4 font-semibold text-text px-0.5">
+            <h2 className="text-[13px] leading-4 font-semibold text-text px-[10px]">
               {t("settings.models.availableModels")}
             </h2>
             {availableModels.map((model: ModelInfo) => (

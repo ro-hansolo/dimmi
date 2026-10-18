@@ -45,7 +45,7 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
 
   if (layout === "stacked") {
     return (
-      <div className={`px-3 py-[9px] ${surface}`}>
+      <div className={`px-[10px] py-[11px] ${surface}`}>
         <div className="mb-2">{label}</div>
         <div className="w-full">{children}</div>
       </div>
@@ -54,7 +54,7 @@ export const SettingContainer: React.FC<SettingContainerProps> = ({
 
   return (
     <div
-      className={`flex items-center justify-between gap-5 min-h-10 px-3 py-[9px] ${surface}`}
+      className={`flex items-center justify-between gap-5 min-h-[38px] px-[10px] py-[9px] ${surface}`}
     >
       <div className="min-w-0 flex-1">{label}</div>
       <div className="relative flex-none flex items-center">{children}</div>

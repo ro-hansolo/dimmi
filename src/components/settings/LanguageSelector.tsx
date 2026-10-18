@@ -143,27 +143,27 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <div className="relative" ref={dropdownRef}>
           <button
             type="button"
-            className={`mac-popup h-[22px] ps-[9px] pe-[3px] text-[13px] rounded-md min-w-[80px] max-w-[220px] text-start flex items-center justify-between ${
+            className={`mac-popup h-[24px] ps-[6px] pe-[2px] text-[13px] rounded-full min-w-[80px] max-w-[220px] text-end flex items-center justify-end ${
               isUpdating("selected_language")
                 ? "opacity-50 cursor-not-allowed"
-                : "cursor-default hover:brightness-[0.98]"
+                : "cursor-default active:opacity-70"
             }`}
             onClick={handleToggle}
             disabled={isUpdating("selected_language")}
           >
             <span className="truncate">{selectedLanguageName}</span>
-            <span className="mac-popup-chevron ms-1.5" aria-hidden="true">
+            <span className="mac-popup-chevron ms-[10px]" aria-hidden="true">
               <svg
                 width="8"
-                height="10"
-                viewBox="0 0 8 10"
+                height="11"
+                viewBox="0 0 8 11"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth={1.5}
+                strokeWidth={1.6}
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M1.5 3.6L4 1.2l2.5 2.4M1.5 6.4L4 8.8l2.5-2.4" />
+                <path d="M1 4.3L4 1.3l3 3M1 6.7L4 9.7l3-3" />
               </svg>
             </span>
           </button>

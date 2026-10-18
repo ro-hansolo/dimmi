@@ -424,11 +424,11 @@ function App() {
           <div className="flex-1 min-w-0 flex flex-col overflow-hidden bg-background">
             <div
               data-tauri-drag-region
-              className="app-titlebar shrink-0 flex items-center px-5"
+              className="app-titlebar shrink-0 flex items-center"
             >
               <h1
                 data-tauri-drag-region
-                className="text-[15px] font-bold tracking-[-0.01em] truncate"
+                className="text-[15px] leading-5 font-semibold tracking-[-0.01em] text-text truncate"
               >
                 {t(
                   SECTIONS_CONFIG[currentSection]?.labelKey ??
@@ -436,8 +436,11 @@ function App() {
                 )}
               </h1>
             </div>
-            <div ref={settingsScrollRef} className="flex-1 overflow-y-auto">
-              <div className="flex flex-col items-center px-5 pt-0.5 pb-5 gap-4">
+            <div
+              ref={settingsScrollRef}
+              className="app-content-scroll flex-1 min-h-0"
+            >
+              <div className="flex flex-col items-center pt-[12px] pb-[20px] gap-[16px]">
                 <AccessibilityPermissions />
                 <SecureInputWarning />
                 {renderSettingsContent(currentSection, setOnboardingPreview)}

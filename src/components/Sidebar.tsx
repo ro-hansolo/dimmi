@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Cpu,
@@ -103,6 +103,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { t } = useTranslation();
   const { settings } = useSettings();
 
+  // Follow the window's key state like AppKit: the selection (and switch
+  // tracks) lose the accent while the window is in the background.
+  useEffect(() => {
+    const root = document.documentElement;
+    const sync = () =>
+      root.toggleAttribute("data-window-inactive", !document.hasFocus());
+    sync();
+    window.addEventListener("focus", sync);
+    window.addEventListener("blur", sync);
+    return () => {
+      window.removeEventListener("focus", sync);
+      window.removeEventListener("blur", sync);
+      root.removeAttribute("data-window-inactive");
+    };
+  }, []);
+
   const availableSections = Object.entries(SECTIONS_CONFIG)
     .filter(([_, config]) => config.enabled(settings))
     .map(([id, config]) => ({ id: id as SidebarSection, ...config }));
@@ -110,9 +126,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <nav
       data-tauri-drag-region
-      className="app-sidebar flex flex-col w-[200px] shrink-0 h-full border-e-[0.5px] border-separator px-2.5 pb-2.5 overflow-y-auto"
+      className="app-sidebar flex flex-col w-[212px] shrink-0 h-full px-[10px] pb-[10px] overflow-y-auto"
     >
-      <div className="flex flex-col w-full gap-0.5">
+      <div className="flex flex-col w-full">
         {availableSections.map((section) => {
           const Icon = section.icon;
           const isActive = activeSection === section.id;
@@ -120,8 +136,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           return (
             <div
               key={section.id}
-              className={`flex gap-2 items-center h-7 shrink-0 px-1.5 w-full rounded-[7px] cursor-default text-[13px] leading-4 text-text ${
-                isActive ? "app-sidebar-selected" : "hover:bg-fill/40"
+              className={`app-sidebar-row flex gap-[7px] items-center h-[32px] shrink-0 ps-[9px] pe-[8px] w-full rounded-[8px] cursor-default text-[13px] leading-4 ${
+                isActive ? "app-sidebar-selected" : ""
               }`}
               onClick={() => onSectionChange(section.id)}
             >
@@ -129,7 +145,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className="mac-tile"
                 style={{ backgroundColor: section.tileColor }}
               >
-                <Icon width={13} height={13} strokeWidth={2.4} />
+                <Icon width={12} height={12} strokeWidth={2.25} />
               </span>
               <p className="truncate" title={t(section.labelKey)}>
                 {t(section.labelKey)}

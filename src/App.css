@@ -22,6 +22,7 @@
   --color-secondary: var(--color-secondary);
   --color-fill: var(--color-fill);
   --color-success: var(--color-success);
+  --color-control: var(--color-control);
 }
 
 :root {
@@ -99,28 +100,42 @@ body,
   top: 13px;
   inset-inline-start: 84px;
 }
+/* Sidebar (System Settings, macOS 27): flush, full height, no divider. On
+   macOS it is fully transparent so the native sidebar material (lib.rs) is
+   the only paint; elsewhere it falls back to the measured opaque colour. */
 .app-sidebar {
   background-color: var(--color-sidebar);
   padding-top: 12px;
-}
-.app-sidebar-selected {
-  background-color: color-mix(in srgb, var(--color-accent) 20%, transparent);
-}
-:root[data-theme="dark"] .app-sidebar-selected {
-  background-color: color-mix(in srgb, var(--color-accent) 34%, transparent);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .app-sidebar-selected {
-    background-color: color-mix(in srgb, var(--color-accent) 34%, transparent);
-  }
 }
 :root[data-platform="macos"] .app-sidebar {
   background-color: var(--color-sidebar-vibrant);
   padding-top: 52px;
 }
+/* 32pt rows, contiguous; selection is a solid accent pill with a white label
+   while the window is key, and a neutral grey pill when it is not. */
+.app-sidebar-row {
+  color: var(--color-text);
+}
+.app-sidebar-selected {
+  background-color: color-mix(in srgb, var(--color-accent), black 4%);
+  color: #fff;
+}
+:root[data-theme="dark"] .app-sidebar-selected {
+  background-color: var(--color-accent);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .app-sidebar-selected {
+    background-color: var(--color-accent);
+  }
+}
+:root[data-window-inactive] .app-sidebar-selected {
+  background-color: var(--color-selection-inactive);
+  color: var(--color-text);
+}
 /* Page title bar; on macOS it also clears the inset traffic lights. */
 .app-titlebar {
   height: 44px;
+  padding-inline: 20px;
 }
 :root[data-platform="macos"] .app-titlebar {
   height: 52px;
@@ -147,34 +162,36 @@ body,
     0 1px 0 rgba(0, 0, 0, 0.12);
 }
 
-/* Pop-up / push button surface */
+/* Pop-up button, form style (macOS 27): borderless value text followed by
+   a 20pt circle holding the up/down chevron. */
 .mac-popup {
-  background: var(--color-chip);
+  background: transparent;
   color: var(--color-text);
-  box-shadow:
-    0 0 0 0.5px rgba(0, 0, 0, 0.14),
-    0 0.5px 1.5px rgba(0, 0, 0, 0.1);
 }
 .mac-popup-chevron {
   display: grid;
   place-items: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-  background: var(--color-accent);
-  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-control);
+  color: var(--color-text);
   flex: none;
 }
 
-/* Grouped inset card */
+/* Push button: flat fill, no border or shadow */
+.mac-button {
+  background: var(--color-control);
+  color: var(--color-text);
+}
+
+/* Grouped inset card: flat fill, radius 12, no border */
 .mac-card {
   background: var(--color-card);
-  border-radius: 10px;
-  box-shadow:
-    0 0 0 0.5px var(--color-card-line),
-    0 0.5px 1px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  box-shadow: 0 0 0 0.5px var(--color-card-line);
 }
-/* Inset hairline separators between the rows of a card */
+/* 1px separators between the rows of a card, inset 10pt on both sides */
 .mac-card-rows > * + * {
   position: relative;
 }
@@ -182,13 +199,54 @@ body,
   content: "";
   position: absolute;
   top: 0;
-  inset-inline-start: 12px;
-  inset-inline-end: 0;
+  inset-inline: 10px;
   height: 1px;
-  transform: scaleY(0.5);
-  transform-origin: top;
   background: var(--color-separator);
   pointer-events: none;
+}
+
+/* Switch (macOS 27): 36x16 track, 22x14 capsule knob inset 1pt. Needs a
+   preceding `input.peer` checkbox. */
+.mac-switch {
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 16px;
+  border-radius: 8px;
+  background: var(--color-fill);
+  transition: background-color 200ms ease;
+}
+.mac-switch::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  inset-inline-start: 1px;
+  width: 22px;
+  height: 14px;
+  border-radius: 7px;
+  background: var(--color-knob);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.1),
+    0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: transform 200ms ease;
+}
+.peer:checked ~ .mac-switch {
+  background: var(--color-accent);
+}
+.peer:checked ~ .mac-switch::after {
+  transform: translateX(12px);
+}
+[dir="rtl"] .peer:checked ~ .mac-switch::after {
+  transform: translateX(-12px);
+}
+:root[data-window-inactive] .peer:checked ~ .mac-switch {
+  background: var(--color-switch-inactive);
+}
+.peer:focus-visible ~ .mac-switch {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 40%, transparent);
+}
+.peer:disabled ~ .mac-switch {
+  opacity: 0.5;
 }
 
 /* Sidebar squircle tile */
@@ -210,24 +268,38 @@ body,
     inset 0 0.5px 0 rgba(255, 255, 255, 0.25);
 }
 
-/* Native-looking range slider */
+/* Native-looking range slider: 6pt track, white capsule knob */
 .mac-slider {
   -webkit-appearance: none;
   appearance: none;
-  height: 4px;
-  border-radius: 2px;
+  height: 6px;
+  border-radius: 3px;
 }
 .mac-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  width: 20px;
+  height: 16px;
+  border-radius: 8px;
   background: #fff;
   box-shadow:
     0 0 0 0.5px rgba(0, 0, 0, 0.12),
     0 1px 3px rgba(0, 0, 0, 0.22);
   cursor: pointer;
+}
+
+/* Like AppKit, the slider fill loses the accent in a background window. The
+   inline gradient reads --color-accent, so override it on the element. */
+:root[data-window-inactive] .mac-slider {
+  --color-accent: rgba(0, 0, 0, 0.2);
+}
+:root[data-theme="dark"][data-window-inactive] .mac-slider {
+  --color-accent: rgba(255, 255, 255, 0.25);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-window-inactive] .mac-slider {
+    --color-accent: rgba(255, 255, 255, 0.25);
+  }
 }
 
 /* Dark variants of the control shadows */
@@ -237,10 +309,8 @@ body,
     inset 0 0.5px 0 rgba(255, 255, 255, 0.12),
     0 1px 0 rgba(0, 0, 0, 0.4);
 }
-:root[data-theme="dark"] .mac-popup {
-  box-shadow:
-    inset 0 0.5px 0 rgba(255, 255, 255, 0.1),
-    0 0 0 0.5px rgba(0, 0, 0, 0.4);
+:root[data-theme="dark"] .mac-switch::after {
+  box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.25);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .mac-keycap {
@@ -249,23 +319,59 @@ body,
       inset 0 0.5px 0 rgba(255, 255, 255, 0.12),
       0 1px 0 rgba(0, 0, 0, 0.4);
   }
-  :root:not([data-theme="light"]) .mac-popup {
-    box-shadow:
-      inset 0 0.5px 0 rgba(255, 255, 255, 0.1),
-      0 0 0 0.5px rgba(0, 0, 0, 0.4);
+  :root:not([data-theme="light"]) .mac-switch::after {
+    box-shadow: 0 1px 1.5px rgba(0, 0, 0, 0.25);
   }
 }
 
 /* Keep onboarding centered when classic scrollbars consume layout space.
    Overlay scrollbars do not reserve a gutter, so this has no effect on them. */
-:root[data-onboarding-active] {
+:root[data-onboarding-active]:not([data-platform="macos"]) {
   scrollbar-gutter: stable both-edges;
 }
 
-/* macOS: leave scrollbars native. Styling ::-webkit-scrollbar (or
-   scrollbar-color) turns WebKit's overlay scrollbars into classic ones with a
-   visible track and a reserved gutter, so the custom scrollbar below is
-   limited to other platforms. */
+/* macOS scrolling. The document itself never scrolls: a scrollbar gutter on
+   <html> is not painted by the root background on the transparent window,
+   so the native vibrancy showed through as strips at the window edges
+   (with "Show scroll bars: Always", WebKit reserves legacy 17px gutters).
+   #root is the scroller instead, and element scrollers paint their own
+   background behind their gutter. */
+:root[data-platform="macos"],
+:root[data-platform="macos"] body {
+  height: 100%;
+  overflow: hidden;
+}
+:root[data-platform="macos"] #root {
+  height: 100%;
+  overflow-y: auto;
+}
+/* macOS scroll bars as System Settings draws them: no track, an 11pt
+   rounded thumb 2pt in from the edge. The content pane reserves the 15pt
+   bar inside its 20pt right margin, so cards never shift or get covered. */
+:root[data-platform="macos"] ::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+  background: transparent;
+}
+:root[data-platform="macos"] ::-webkit-scrollbar-track,
+:root[data-platform="macos"] ::-webkit-scrollbar-corner {
+  background: transparent;
+}
+:root[data-platform="macos"] ::-webkit-scrollbar-thumb {
+  background-color: var(--color-scroll-thumb);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+  min-height: 32px;
+}
+.app-content-scroll {
+  overflow-y: auto;
+  padding-inline: 20px;
+}
+:root[data-platform="macos"] .app-content-scroll {
+  overflow-y: scroll;
+  padding-inline-end: 5px;
+}
 
 /* Custom Scrollbar (non-macOS) */
 :root:not([data-platform="macos"])::-webkit-scrollbar,

@@ -65,10 +65,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         type="button"
-        className={`mac-popup h-[22px] ps-[9px] pe-[3px] text-[13px] leading-4 rounded-md min-w-[80px] max-w-[260px] w-full text-start grid grid-cols-[1fr_auto] gap-1.5 items-center transition-[filter] duration-150 focus:outline-none focus-visible:ring-[3px] focus-visible:ring-accent/40 ${
+        className={`mac-popup h-[24px] ps-[6px] pe-[2px] text-[13px] leading-4 rounded-full min-w-[80px] max-w-[260px] w-full text-end grid grid-cols-[1fr_auto] gap-[10px] items-center focus:outline-none focus-visible:ring-[3px] focus-visible:ring-accent/40 ${
           disabled
             ? "opacity-50 cursor-not-allowed"
-            : "cursor-default hover:brightness-[0.98] active:brightness-95"
+            : "cursor-default active:opacity-70"
         }`}
         onClick={handleToggle}
         disabled={disabled}
@@ -77,15 +77,15 @@ export const Dropdown: React.FC<DropdownProps> = ({
         <span className="mac-popup-chevron" aria-hidden="true">
           <svg
             width="8"
-            height="10"
-            viewBox="0 0 8 10"
+            height="11"
+            viewBox="0 0 8 11"
             fill="none"
             stroke="currentColor"
-            strokeWidth={1.5}
+            strokeWidth={1.6}
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M1.5 3.6L4 1.2l2.5 2.4M1.5 6.4L4 8.8l2.5-2.4" />
+            <path d="M1 4.3L4 1.3l3 3M1 6.7L4 9.7l3-3" />
           </svg>
         </span>
       </button>

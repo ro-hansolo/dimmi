@@ -12,31 +12,42 @@
   /* Palette source of truth. Each themed color is defined once as a
      light/dark pair; the active tokens below and the `data-theme` overrides
      reference these, so a value lives in exactly one place. */
-  --light-color-text: #1d1d1f;
-  --light-color-background: #f3f3f5;
+  /* Values measured from macOS 27 System Settings (.dimmi/macos27-spec.md). */
+  --light-color-text: rgba(0, 0, 0, 0.85);
+  --light-color-background: #ffffff;
   --light-color-accent: #007aff;
   --light-color-logo-stroke: #1d1d1f;
-  --light-color-card: #ffffff;
-  --light-color-sidebar: #e9e8ee;
-  --light-color-sidebar-vibrant: rgba(236, 235, 241, 0.35);
-  --light-color-separator: rgba(0, 0, 0, 0.1);
-  --light-color-card-line: rgba(0, 0, 0, 0.07);
+  --light-color-card: #f8f8f8;
+  --light-color-sidebar: #f0efef;
+  --light-color-sidebar-vibrant: rgba(245, 244, 244, 0.7);
+  --light-color-separator: rgba(0, 0, 0, 0.04);
+  --light-color-card-line: transparent;
   --light-color-chip: #ffffff;
   --light-color-secondary: rgba(0, 0, 0, 0.5);
-  --light-color-fill: rgba(0, 0, 0, 0.09);
+  --light-color-fill: rgba(0, 0, 0, 0.1);
+  --light-color-control: rgba(0, 0, 0, 0.07);
+  --light-color-selection-inactive: rgba(0, 0, 0, 0.045);
+  --light-color-switch-inactive: rgba(0, 0, 0, 0.13);
+  --light-color-knob: #ffffff;
+  --light-color-scroll-thumb: rgba(0, 0, 0, 0.48);
 
-  --dark-color-text: rgba(255, 255, 255, 0.9);
-  --dark-color-background: #1e1e20;
+  --dark-color-text: rgba(255, 255, 255, 0.85);
+  --dark-color-background: #2c2b2b;
   --dark-color-accent: #0a84ff;
   --dark-color-logo-stroke: #f5f5f7;
-  --dark-color-card: #2a2a2d;
-  --dark-color-sidebar: #2c2a33;
-  --dark-color-sidebar-vibrant: rgba(44, 42, 52, 0.3);
-  --dark-color-separator: rgba(255, 255, 255, 0.1);
-  --dark-color-card-line: rgba(255, 255, 255, 0.06);
-  --dark-color-chip: #3a3a3d;
+  --dark-color-card: #333333;
+  --dark-color-sidebar: #312e2e;
+  --dark-color-sidebar-vibrant: rgba(46, 44, 44, 0.8);
+  --dark-color-separator: rgba(255, 255, 255, 0.06);
+  --dark-color-card-line: transparent;
+  --dark-color-chip: #464646;
   --dark-color-secondary: rgba(255, 255, 255, 0.5);
-  --dark-color-fill: rgba(255, 255, 255, 0.16);
+  --dark-color-fill: rgba(255, 255, 255, 0.11);
+  --dark-color-control: rgba(255, 255, 255, 0.09);
+  --dark-color-selection-inactive: rgba(255, 255, 255, 0.08);
+  --dark-color-switch-inactive: rgba(255, 255, 255, 0.14);
+  --dark-color-knob: rgba(255, 255, 255, 0.87);
+  --dark-color-scroll-thumb: rgba(255, 255, 255, 0.6);
 
   /* Semantic status colors (Apple system orange / red). */
   --light-color-warning: #c93400;
@@ -64,6 +75,11 @@
   --color-chip: var(--light-color-chip);
   --color-secondary: var(--light-color-secondary);
   --color-fill: var(--light-color-fill);
+  --color-control: var(--light-color-control);
+  --color-selection-inactive: var(--light-color-selection-inactive);
+  --color-switch-inactive: var(--light-color-switch-inactive);
+  --color-knob: var(--light-color-knob);
+  --color-scroll-thumb: var(--light-color-scroll-thumb);
   --color-warning: var(--light-color-warning);
   --color-error: var(--light-color-error);
 }
@@ -83,6 +99,11 @@
     --color-chip: var(--dark-color-chip);
     --color-secondary: var(--dark-color-secondary);
     --color-fill: var(--dark-color-fill);
+    --color-control: var(--dark-color-control);
+    --color-selection-inactive: var(--dark-color-selection-inactive);
+    --color-switch-inactive: var(--dark-color-switch-inactive);
+    --color-knob: var(--dark-color-knob);
+    --color-scroll-thumb: var(--dark-color-scroll-thumb);
     --color-warning: var(--dark-color-warning);
     --color-error: var(--dark-color-error);
   }
@@ -112,6 +133,11 @@
   --color-chip: var(--light-color-chip);
   --color-secondary: var(--light-color-secondary);
   --color-fill: var(--light-color-fill);
+  --color-control: var(--light-color-control);
+  --color-selection-inactive: var(--light-color-selection-inactive);
+  --color-switch-inactive: var(--light-color-switch-inactive);
+  --color-knob: var(--light-color-knob);
+  --color-scroll-thumb: var(--light-color-scroll-thumb);
   --color-warning: var(--light-color-warning);
   --color-error: var(--light-color-error);
 }
@@ -130,6 +156,11 @@
   --color-chip: var(--dark-color-chip);
   --color-secondary: var(--dark-color-secondary);
   --color-fill: var(--dark-color-fill);
+  --color-control: var(--dark-color-control);
+  --color-selection-inactive: var(--dark-color-selection-inactive);
+  --color-switch-inactive: var(--dark-color-switch-inactive);
+  --color-knob: var(--dark-color-knob);
+  --color-scroll-thumb: var(--dark-color-scroll-thumb);
   --color-warning: var(--dark-color-warning);
   --color-error: var(--dark-color-error);
 }

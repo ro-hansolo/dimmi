@@ -63,7 +63,7 @@ export const TextDisplay: React.FC<TextDisplayProps> = ({
         {copyable && value && (
           <button
             onClick={handleCopy}
-            className="mac-popup flex items-center justify-center px-2 w-12 min-h-8 text-[12px] rounded-md flex-shrink-0 cursor-default hover:brightness-[0.97] active:brightness-90"
+            className="mac-button flex items-center justify-center px-2 w-12 min-h-8 text-[12px] rounded-[7px] flex-shrink-0 cursor-default active:brightness-90"
             title="Copy to clipboard"
           >
             {showCopied ? (

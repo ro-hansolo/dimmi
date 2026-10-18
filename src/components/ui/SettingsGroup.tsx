@@ -12,9 +12,9 @@ export const SettingsGroup: React.FC<SettingsGroupProps> = ({
   children,
 }) => {
   return (
-    <div className="space-y-[7px]">
+    <div className={`space-y-[10px] ${title ? "pt-[8px]" : ""}`}>
       {title && (
-        <div className="px-0.5">
+        <div className="px-[10px]">
           <h2 className="text-[13px] leading-4 font-semibold text-text">
             {title}
           </h2>

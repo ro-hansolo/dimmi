@@ -40,7 +40,7 @@ type NonCreatableProps = {
 export type SelectProps = BaseProps & (CreatableProps | NonCreatableProps);
 
 // Dimmi: macOS pop-up/combo box look on the shared theme tokens.
-const baseBackground = "var(--color-chip)";
+const baseBackground = "var(--color-control)";
 const hoverBackground =
   "color-mix(in srgb, var(--color-accent) 12%, transparent)";
 const focusBackground =
@@ -50,12 +50,12 @@ const neutralBorder = "var(--color-separator)";
 const selectStyles: StylesConfig<SelectOption, false> = {
   control: (base, state) => ({
     ...base,
-    minHeight: 26,
-    borderRadius: 6,
+    minHeight: 24,
+    borderRadius: 7,
     borderWidth: 0,
     boxShadow: state.isFocused
       ? "0 0 0 3px color-mix(in srgb, var(--color-accent) 40%, transparent)"
-      : `0 0 0 0.5px ${neutralBorder}, 0 0.5px 1.5px rgba(0, 0, 0, 0.1)`,
+      : `0 0 0 0.5px ${neutralBorder}`,
     backgroundColor: baseBackground,
     fontSize: "13px",
     color: "var(--color-text)",
