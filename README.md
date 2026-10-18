@@ -26,8 +26,8 @@ i picked handy as the base on purpose. it's fast, it runs fully offline, it's op
 
 ## screenshots
 
-|                                               |                                                  |
-| --------------------------------------------- | ------------------------------------------------ |
+|                                                       |                                                          |
+| ----------------------------------------------------- | -------------------------------------------------------- |
 | ![recording](.github/assets/overlay-recording.png)    | ![transcribing](.github/assets/overlay-transcribing.png) |
 | ![settings, light](.github/assets/settings-light.png) | ![settings, dark](.github/assets/settings-dark.png)      |
 
