@@ -620,6 +620,11 @@
           "title": "ggml",
           "description": "Wydajne wykonywanie modelu rozpoznawania mowy Whisper od OpenAI",
           "details": "Dimmi używa ggml do szybkiego, lokalnego przetwarzania mowy na tekst. Dzięki niesamowitej pracy Georgi Gerganova i współtwórców."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       },
       "whatsNewUpdates": {

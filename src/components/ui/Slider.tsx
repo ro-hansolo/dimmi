@@ -49,7 +49,7 @@ export const Slider: React.FC<SliderProps> = ({
       disabled={disabled}
     >
       <div className="w-full">
-        <div className="flex items-center space-x-1 h-6">
+        <div className="flex items-center gap-2 h-6">
           <input
             type="range"
             aria-label={label}
@@ -59,17 +59,15 @@ export const Slider: React.FC<SliderProps> = ({
             value={value}
             onChange={handleChange}
             disabled={disabled}
-            className="flex-grow h-2 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-logo-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mac-slider w-[150px] flex-none cursor-default focus:outline-none focus-visible:ring-[3px] focus-visible:ring-accent/40 disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
-              background: `linear-gradient(to right, var(--color-background-ui) ${
+              background: `linear-gradient(to right, var(--color-accent) ${
                 ((value - min) / (max - min)) * 100
-              }%, rgba(128, 128, 128, 0.2) ${
-                ((value - min) / (max - min)) * 100
-              }%)`,
+              }%, var(--color-fill) ${((value - min) / (max - min)) * 100}%)`,
             }}
           />
           {showValue && (
-            <span className="text-sm font-medium text-text/90 w-12 text-end">
+            <span className="text-[12px] tabular-nums text-secondary w-10 text-end">
               {formatValue(value)}
             </span>
           )}

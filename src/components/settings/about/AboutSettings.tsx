@@ -88,8 +88,28 @@ export const AboutSettings: React.FC = () => {
           grouped={true}
           layout="stacked"
         >
-          <div className="text-sm text-mid-gray">
+          <div className="text-[11px] leading-[14px] text-secondary">
             {t("settings.about.acknowledgments.ggml.details")}
+          </div>
+        </SettingContainer>
+        <SettingContainer
+          title={t("settings.about.acknowledgments.handy.title")}
+          description={t("settings.about.acknowledgments.handy.description")}
+          grouped={true}
+          layout="stacked"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-[11px] leading-[14px] text-secondary">
+              {t("settings.about.acknowledgments.handy.details")}
+            </div>
+            <Button
+              variant="secondary"
+              size="md"
+              className="shrink-0"
+              onClick={() => openUrl("https://github.com/cjpais/Handy")}
+            >
+              {t("settings.about.sourceCode.button")}
+            </Button>
           </div>
         </SettingContainer>
       </SettingsGroup>

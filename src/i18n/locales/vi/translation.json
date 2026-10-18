@@ -620,6 +620,11 @@
           "title": "ggml",
           "description": "Suy luận hiệu suất cao của mô hình nhận dạng giọng nói tự động Whisper của OpenAI",
           "details": "Dimmi sử dụng ggml để xử lý chuyển đổi giọng nói thành văn bản nhanh, cục bộ. Cảm ơn công việc tuyệt vời của Georgi Gerganov và các cộng tác viên."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       },
       "whatsNewUpdates": {

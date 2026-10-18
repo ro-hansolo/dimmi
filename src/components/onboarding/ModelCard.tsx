@@ -111,22 +111,22 @@ const ModelCard: React.FC<ModelCardProps> = ({
   );
 
   const baseClasses =
-    "flex flex-col rounded-xl px-4 py-3 gap-2 text-left transition-all duration-200";
+    "mac-card flex flex-col px-3 py-2.5 gap-2 text-left transition-[box-shadow,background-color] duration-150";
 
   const getVariantClasses = () => {
     if (status === "active") {
-      return "border-2 border-logo-primary/50 bg-logo-primary/10";
+      return "outline-2 outline-accent";
     }
     if (isFeatured) {
-      return "border-2 border-logo-primary/25 bg-logo-primary/5";
+      return "outline-1 outline-accent/40";
     }
-    return "border-2 border-mid-gray/20";
+    return "";
   };
 
   const getInteractiveClasses = () => {
     if (!isClickable) return "";
     if (disabled) return "opacity-50 cursor-not-allowed";
-    return "cursor-pointer hover:border-logo-primary/50 hover:bg-logo-primary/5 hover:shadow-lg hover:scale-[1.01] active:scale-[0.99] group";
+    return "cursor-default hover:outline-2 hover:outline-accent/50 active:brightness-[0.98] group";
   };
 
   const handleClick = () => {
@@ -165,7 +165,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
         <div className="flex flex-col items-start flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
             <h3
-              className={`text-base font-semibold text-text ${isClickable ? "group-hover:text-logo-primary" : ""} transition-colors`}
+              className={`text-[13px] leading-4 font-semibold text-text ${isClickable ? "group-hover:text-logo-primary" : ""} transition-colors`}
             >
               {displayName}
             </h3>
@@ -191,7 +191,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
               </Badge>
             )}
           </div>
-          <p className="text-text/60 text-sm leading-relaxed">
+          <p className="text-secondary text-[11px] leading-[14px] mt-0.5">
             {displayDescription}
           </p>
         </div>
@@ -225,7 +225,7 @@ const ModelCard: React.FC<ModelCardProps> = ({
         )}
       </div>
 
-      <hr className="w-full border-mid-gray/20" />
+      <hr className="w-full border-0 border-t-[0.5px] border-separator" />
 
       {/* Bottom row: tags + action buttons (full width) */}
       <div className="flex items-center gap-3 w-full -mb-0.5 mt-0.5 h-5">

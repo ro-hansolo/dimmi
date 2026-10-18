@@ -620,6 +620,11 @@
           "title": "ggml",
           "description": "Biblioteca de tensores de alto rendimiento para inferencia de aprendizaje automático en el dispositivo",
           "details": "El habla a texto local de Dimmi está construido sobre transcribe.cpp y ggml. Gracias al increíble trabajo de Georgi Gerganov y colaboradores."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       },
       "whatsNewUpdates": {

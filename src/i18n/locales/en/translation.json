@@ -624,6 +624,11 @@
           "title": "ggml",
           "description": "High-performance tensor library for on-device machine learning inference",
           "details": "Handy's local speech-to-text is built on transcribe.cpp and ggml. Thanks to the amazing work by Georgi Gerganov and contributors."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       }
     }

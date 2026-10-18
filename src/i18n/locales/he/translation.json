@@ -620,6 +620,11 @@
           "title": "ggml",
           "description": "הסקה מהירה לביצועים גבוהים עבור מודל זיהוי הדיבור Whisper של OpenAI",
           "details": "Dimmi משתמש ב-ggml לתמלול מהיר ומקומי. תודה לעבודה המדהימה של Georgi Gerganov וכל התורמים."
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       },
       "whatsNewUpdates": {
