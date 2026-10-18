@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { listen } from "@tauri-apps/api/event";
 import { formatKeyCombination } from "../../lib/utils/keyboard";
 import { ResetButton } from "../ui/ResetButton";
+import { Keycaps } from "../ui/Keycaps";
 import { SettingContainer } from "../ui/SettingContainer";
 import { useSettings } from "../../hooks/useSettings";
 import { useOsType } from "../../hooks/useOsType";
@@ -327,16 +328,19 @@ export const HandyKeysShortcutInput: React.FC<HandyKeysShortcutInputProps> = ({
         {isRecording ? (
           <div
             ref={shortcutRef}
-            className="mac-keycap ring-[3px] ring-accent/40"
+            className="flex items-center gap-1 rounded-[6px] ring-[3px] ring-accent/40"
           >
-            {formatCurrentKeys()}
+            <Keycaps label={formatCurrentKeys()} osType={osType} />
           </div>
         ) : (
           <div
-            className="mac-keycap cursor-default hover:brightness-[0.97]"
+            className="flex items-center gap-1 cursor-default hover:brightness-[0.97]"
             onClick={startRecording}
           >
-            {formatKeyCombination(binding.current_binding, osType)}
+            <Keycaps
+              label={formatKeyCombination(binding.current_binding, osType)}
+              osType={osType}
+            />
           </div>
         )}
         <ResetButton
