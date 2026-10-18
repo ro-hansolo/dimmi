@@ -1,0 +1,3 @@
+# Dimmi keeps its own README when merging upstream Handy.
+# Needs once per clone: git config merge.ours.driver true
+README.md merge=ours
