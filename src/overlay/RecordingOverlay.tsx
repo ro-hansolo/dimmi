@@ -247,11 +247,11 @@ const RecordingOverlay: React.FC = () => {
       aria-label="cancel"
       onClick={() => commands.cancelOperation()}
     >
-      <svg viewBox="0 0 16 16" aria-hidden="true">
+      <svg viewBox="0 0 10 10" aria-hidden="true">
         <path
-          d="M4 4 L12 12 M12 4 L4 12"
+          d="M2 2 L8 8 M8 2 L2 8"
           stroke="currentColor"
-          strokeWidth="1.6"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
       </svg>
@@ -278,7 +278,11 @@ const RecordingOverlay: React.FC = () => {
   const workingRow = (label: string, showCancel: boolean) => (
     <div className="sbase">
       <div className="sbase-l">
-        <span className="sspinner" />
+        <span className="sspinner">
+          <i />
+          <i />
+          <i />
+        </span>
       </div>
       <span className="swork-label">{label}</span>
       <div className="sbase-r">{showCancel && cancelBtn}</div>
