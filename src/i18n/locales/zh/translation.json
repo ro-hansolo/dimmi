@@ -620,6 +620,11 @@
           "title": "ggml",
           "description": "OpenAI Whisper 自动语音识别模型的高性能推理",
           "details": "Dimmi 使用 ggml 进行快速的本地语音转文字处理。感谢 Georgi Gerganov 和贡献者们的出色工作。"
+        },
+        "handy": {
+          "title": "Handy",
+          "description": "Dimmi is a reskin of Handy by CJ Pais",
+          "details": "Everything under the hood (transcription, models and settings) is Handy's work."
         }
       },
       "whatsNewUpdates": {

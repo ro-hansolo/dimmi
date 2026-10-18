@@ -235,11 +235,9 @@ export const ModelsSettings: React.FC = () => {
 
   return (
     <div className="max-w-3xl w-full mx-auto space-y-4">
-      <div className="mb-4">
-        <h1 className="text-xl font-semibold mb-2">
-          {t("settings.models.title")}
-        </h1>
-        <p className="text-sm text-text/60">
+      <div>
+        <h1 className="sr-only">{t("settings.models.title")}</h1>
+        <p className="text-[11px] leading-[14px] text-secondary px-0.5">
           {t("settings.models.description")}
         </p>
       </div>
@@ -248,13 +246,13 @@ export const ModelsSettings: React.FC = () => {
 
       {/* Search bar — filter the catalog by name or description */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 pointer-events-none" />
+        <Search className="absolute start-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-text/40 pointer-events-none" />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder={t("settings.models.searchPlaceholder")}
-          className="w-full pl-9 pr-3 py-2 text-sm bg-mid-gray/10 border border-mid-gray/40 rounded-lg focus:outline-none focus:ring-1 focus:ring-logo-primary placeholder:text-text/40"
+          className="w-full ps-8 pe-3 h-7 text-[13px] bg-fill/50 rounded-lg focus:outline-none focus:ring-[3px] focus:ring-accent/40 placeholder:text-secondary"
         />
       </div>
 
@@ -262,7 +260,7 @@ export const ModelsSettings: React.FC = () => {
         {/* Downloaded Models Section — header always visible so filter stays accessible */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-medium text-text/60">
+            <h2 className="text-[13px] leading-4 font-semibold text-text px-0.5">
               {t("settings.models.yourModels")}
             </h2>
             <div className="flex items-center gap-2">
@@ -423,7 +421,7 @@ export const ModelsSettings: React.FC = () => {
         {/* Available Models Section */}
         {availableModels.length > 0 && (
           <div className="space-y-3">
-            <h2 className="text-sm font-medium text-text/60">
+            <h2 className="text-[13px] leading-4 font-semibold text-text px-0.5">
               {t("settings.models.availableModels")}
             </h2>
             {availableModels.map((model: ModelInfo) => (

@@ -1,8 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Cog, FlaskConical, History, Info, Sparkles, Cpu } from "lucide-react";
-import HandyTextLogo from "./icons/HandyTextLogo";
-import HandyHand from "./icons/HandyHand";
+import {
+  Cpu,
+  FlaskConical,
+  History,
+  Info,
+  Settings,
+  SlidersHorizontal,
+  Sparkles,
+} from "lucide-react";
 import { useSettings } from "../hooks/useSettings";
 import {
   GeneralSettings,
@@ -27,6 +33,8 @@ interface IconProps {
 interface SectionConfig {
   labelKey: string;
   icon: React.ComponentType<IconProps>;
+  /** Dimmi: colour of the System Settings-style squircle tile. */
+  tileColor: string;
   component: React.ComponentType;
   enabled: (settings: any) => boolean;
 }
@@ -34,43 +42,50 @@ interface SectionConfig {
 export const SECTIONS_CONFIG = {
   general: {
     labelKey: "sidebar.general",
-    icon: HandyHand,
+    icon: Settings,
+    tileColor: "#8E8E93",
     component: GeneralSettings,
     enabled: () => true,
   },
   history: {
     labelKey: "sidebar.history",
     icon: History,
+    tileColor: "#007AFF",
     component: HistorySettings,
     enabled: () => true,
   },
   models: {
     labelKey: "sidebar.models",
     icon: Cpu,
+    tileColor: "#AF52DE",
     component: ModelsSettings,
     enabled: () => true,
   },
   advanced: {
     labelKey: "sidebar.advanced",
-    icon: Cog,
+    icon: SlidersHorizontal,
+    tileColor: "#5856D6",
     component: AdvancedSettings,
     enabled: () => true,
   },
   postprocessing: {
     labelKey: "sidebar.postProcessing",
     icon: Sparkles,
+    tileColor: "#FF9500",
     component: PostProcessingSettings,
     enabled: (settings) => settings?.post_process_enabled ?? false,
   },
   debug: {
     labelKey: "sidebar.debug",
     icon: FlaskConical,
+    tileColor: "#FF3B30",
     component: DebugSettings,
     enabled: (settings) => settings?.debug_mode ?? false,
   },
   about: {
     labelKey: "sidebar.about",
     icon: Info,
+    tileColor: "#30B0C7",
     component: AboutSettings,
     enabled: () => true,
   },
@@ -93,9 +108,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     .map(([id, config]) => ({ id: id as SidebarSection, ...config }));
 
   return (
-    <div className="flex flex-col w-40 h-full border-e border-mid-gray/20 items-center px-2">
-      <HandyTextLogo width={120} className="m-4" />
-      <div className="flex flex-col w-full items-center gap-1 pt-2 border-t border-mid-gray/20">
+    <nav
+      data-tauri-drag-region
+      className="app-sidebar flex flex-col w-[200px] shrink-0 h-full border-e-[0.5px] border-separator px-2.5 pb-2.5 overflow-y-auto"
+    >
+      <div className="flex flex-col w-full gap-0.5">
         {availableSections.map((section) => {
           const Icon = section.icon;
           const isActive = activeSection === section.id;
@@ -103,24 +120,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
           return (
             <div
               key={section.id}
-              className={`flex gap-2 items-center p-2 w-full rounded-lg cursor-pointer transition-colors ${
-                isActive
-                  ? "bg-logo-primary/80"
-                  : "hover:bg-mid-gray/20 hover:opacity-100 opacity-85"
+              className={`flex gap-2 items-center h-7 shrink-0 px-1.5 w-full rounded-[7px] cursor-default text-[13px] leading-4 text-text ${
+                isActive ? "app-sidebar-selected" : "hover:bg-fill/40"
               }`}
               onClick={() => onSectionChange(section.id)}
             >
-              <Icon width={24} height={24} className="shrink-0" />
-              <p
-                className="text-sm font-medium truncate"
-                title={t(section.labelKey)}
+              <span
+                className="mac-tile"
+                style={{ backgroundColor: section.tileColor }}
               >
+                <Icon width={13} height={13} strokeWidth={2.4} />
+              </span>
+              <p className="truncate" title={t(section.labelKey)}>
                 {t(section.labelKey)}
               </p>
             </div>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 };

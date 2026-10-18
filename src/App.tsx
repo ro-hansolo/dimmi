@@ -420,19 +420,33 @@ function App() {
             activeSection={currentSection}
             onSectionChange={setCurrentSection}
           />
-          {/* Scrollable content area */}
-          <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Content pane: titlebar, scrollable content, footer status strip */}
+          <div className="flex-1 min-w-0 flex flex-col overflow-hidden bg-background">
+            <div
+              data-tauri-drag-region
+              className="app-titlebar shrink-0 flex items-center px-5"
+            >
+              <h1
+                data-tauri-drag-region
+                className="text-[15px] font-bold tracking-[-0.01em] truncate"
+              >
+                {t(
+                  SECTIONS_CONFIG[currentSection]?.labelKey ??
+                    SECTIONS_CONFIG.general.labelKey,
+                )}
+              </h1>
+            </div>
             <div ref={settingsScrollRef} className="flex-1 overflow-y-auto">
-              <div className="flex flex-col items-center p-4 gap-4">
+              <div className="flex flex-col items-center px-5 pt-0.5 pb-5 gap-4">
                 <AccessibilityPermissions />
                 <SecureInputWarning />
                 {renderSettingsContent(currentSection, setOnboardingPreview)}
               </div>
             </div>
+            {/* Fixed footer at bottom */}
+            <Footer />
           </div>
         </div>
-        {/* Fixed footer at bottom */}
-        <Footer />
       </div>
     );
   }

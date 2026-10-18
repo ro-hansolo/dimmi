@@ -282,7 +282,7 @@ const ModelMigration: React.FC<ModelMigrationProps> = ({
         </p>
       </div>
 
-      <ul className="w-full max-w-[560px] min-h-0 overflow-y-auto rounded-xl border-2 border-mid-gray/20 divide-y divide-mid-gray/20">
+      <ul className="w-full max-w-[560px] min-h-0 overflow-y-auto mac-card mac-card-rows">
         {rows.map((pair) => (
           <MigrationRow
             key={pair.retired.id}

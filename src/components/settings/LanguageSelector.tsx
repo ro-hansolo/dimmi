@@ -143,36 +143,35 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <div className="relative" ref={dropdownRef}>
           <button
             type="button"
-            className={`px-2 py-1 text-sm font-semibold bg-mid-gray/10 border border-mid-gray/80 rounded min-w-[200px] text-start flex items-center justify-between transition-all duration-150 ${
+            className={`mac-popup h-[22px] ps-[9px] pe-[3px] text-[13px] rounded-md min-w-[80px] max-w-[220px] text-start flex items-center justify-between ${
               isUpdating("selected_language")
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-logo-primary/10 cursor-pointer hover:border-logo-primary"
+                : "cursor-default hover:brightness-[0.98]"
             }`}
             onClick={handleToggle}
             disabled={isUpdating("selected_language")}
           >
             <span className="truncate">{selectedLanguageName}</span>
-            <svg
-              className={`w-4 h-4 ms-2 transition-transform duration-200 ${
-                isOpen ? "transform rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
+            <span className="mac-popup-chevron ms-1.5" aria-hidden="true">
+              <svg
+                width="8"
+                height="10"
+                viewBox="0 0 8 10"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+              >
+                <path d="M1.5 3.6L4 1.2l2.5 2.4M1.5 6.4L4 8.8l2.5-2.4" />
+              </svg>
+            </span>
           </button>
 
           {isOpen && !isUpdating("selected_language") && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-mid-gray/80 rounded shadow-lg z-50 max-h-60 overflow-hidden">
+            <div className="absolute top-full end-0 w-56 mt-1 bg-card rounded-lg shadow-[0_0_0_0.5px_rgba(0,0,0,0.18),0_10px_30px_rgba(0,0,0,0.2)] z-50 max-h-60 overflow-hidden">
               {/* Search input */}
-              <div className="p-2 border-b border-mid-gray/80">
+              <div className="p-1.5 border-b-[0.5px] border-separator">
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -180,11 +179,11 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                   onChange={handleSearchChange}
                   onKeyDown={handleKeyDown}
                   placeholder={t("settings.general.language.searchPlaceholder")}
-                  className="w-full px-2 py-1 text-sm bg-mid-gray/10 border border-mid-gray/40 rounded focus:outline-none focus:ring-1 focus:ring-logo-primary focus:border-logo-primary"
+                  className="w-full px-2 h-[22px] text-[13px] bg-fill/50 rounded-md focus:outline-none focus:ring-[3px] focus:ring-accent/40"
                 />
               </div>
 
-              <div className="max-h-48 overflow-y-auto">
+              <div className="max-h-48 overflow-y-auto p-[5px]">
                 {filteredLanguages.length === 0 ? (
                   <div className="px-2 py-2 text-sm text-mid-gray text-center">
                     {t("settings.general.language.noResults")}
@@ -194,9 +193,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
                     <button
                       key={language.value}
                       type="button"
-                      className={`w-full px-2 py-1 text-sm text-start hover:bg-logo-primary/10 transition-colors duration-150 ${
+                      className={`w-full px-2.5 py-[3px] text-[13px] text-start rounded-[5px] hover:bg-accent hover:text-white ${
                         selectedLanguage === language.value
-                          ? "bg-logo-primary/20 text-logo-primary font-semibold"
+                          ? "bg-accent/15"
                           : ""
                       }`}
                       onClick={() => handleLanguageSelect(language.value)}

@@ -22,9 +22,9 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <div className="w-full border-t border-mid-gray/20 pt-3">
-      <div className="flex justify-between items-center text-xs px-4 pb-3 text-text/60">
-        <div className="flex items-center gap-4">
+    <div className="w-full shrink-0 border-t-[0.5px] border-separator">
+      <div className="flex justify-between items-center h-7 text-[11px] leading-[14px] px-3.5 text-secondary">
+        <div className="flex items-center gap-4 text-text/75">
           <ModelSelector />
         </div>
 

@@ -951,6 +951,25 @@ pub fn run(cli_args: CliArgs) {
                     .maximizable(true)
                     .visible(false);
 
+            // Dimmi: System Settings-style unified titlebar. The traffic lights
+            // sit inside a translucent (vibrancy) sidebar drawn by the webview.
+            #[cfg(target_os = "macos")]
+            {
+                use tauri::utils::config::WindowEffectsConfig;
+                use tauri::window::{Effect, EffectState};
+                win_builder = win_builder
+                    .title_bar_style(tauri::TitleBarStyle::Overlay)
+                    .hidden_title(true)
+                    .traffic_light_position(tauri::LogicalPosition::new(18.0, 22.0))
+                    .transparent(true)
+                    .effects(WindowEffectsConfig {
+                        effects: vec![Effect::Sidebar],
+                        state: Some(EffectState::FollowsWindowActiveState),
+                        radius: None,
+                        color: None,
+                    });
+            }
+
             if let Some(data_dir) = portable::data_dir() {
                 win_builder = win_builder.data_directory(data_dir.join("webview"));
             }

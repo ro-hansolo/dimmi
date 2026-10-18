@@ -19,33 +19,32 @@ export const Button: React.FC<ButtonProps> = ({
   size = "md",
   ...props
 }) => {
+  // Dimmi: macOS push buttons. Accent-filled for primary actions, a raised
+  // chip for everything else.
   const baseClasses =
-    "font-medium rounded-lg border focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer";
+    "font-normal rounded-md focus:outline-none focus-visible:ring-[3px] focus-visible:ring-accent/40 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-default inline-flex items-center justify-center gap-1.5";
 
   const variantClasses = {
     primary:
-      "text-white bg-background-ui border-background-ui hover:bg-background-ui/80 hover:border-background-ui/80 focus:ring-1 focus:ring-background-ui",
+      "text-white bg-accent shadow-[0_0_0_0.5px_rgba(0,0,0,0.12),0_0.5px_1.5px_rgba(0,0,0,0.12)] hover:brightness-110 active:brightness-95",
     "primary-soft":
-      "text-text bg-logo-primary/20 border-transparent hover:bg-logo-primary/30 focus:ring-1 focus:ring-logo-primary",
-    secondary:
-      "bg-mid-gray/10 border-mid-gray/20 hover:bg-background-ui/30 hover:border-logo-primary focus:outline-none",
-    // Secondary's neutral resting look, but hover/focus use the semantic
-    // --color-warning token (theme.css) instead of the pink accent — for
-    // buttons sitting on warning surfaces like SecureInputWarning
+      "text-accent bg-accent/12 hover:bg-accent/20 active:bg-accent/25",
+    secondary: "mac-popup hover:brightness-[0.97] active:brightness-90",
+    // Secondary's neutral resting look, with the semantic --color-warning
+    // token (theme.css) on hover — for buttons on warning surfaces like
+    // SecureInputWarning
     warning:
-      "text-text bg-mid-gray/10 border-mid-gray/20 hover:bg-warning/15 hover:border-warning focus:ring-1 focus:ring-warning",
+      "mac-popup hover:text-warning hover:bg-warning/10 active:brightness-90",
     danger:
-      "text-white bg-red-600 border-mid-gray/20 hover:bg-red-700 hover:border-red-700 focus:ring-1 focus:ring-red-500",
-    "danger-ghost":
-      "text-red-400 border-transparent hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/20",
-    ghost:
-      "text-current border-transparent hover:bg-mid-gray/10 hover:border-logo-primary focus:bg-mid-gray/20",
+      "text-white bg-error shadow-[0_0_0_0.5px_rgba(0,0,0,0.12),0_0.5px_1.5px_rgba(0,0,0,0.12)] hover:brightness-110 active:brightness-95",
+    "danger-ghost": "text-error hover:bg-error/10 active:bg-error/20",
+    ghost: "text-current hover:bg-fill/60 active:bg-fill",
   };
 
   const sizeClasses = {
-    sm: "px-2 py-1 text-xs",
-    md: "px-4 py-[5px] text-sm",
-    lg: "px-4 py-2 text-base",
+    sm: "h-[22px] px-2 text-[12px]",
+    md: "h-[22px] px-2.5 text-[13px]",
+    lg: "h-7 px-4 text-[13px]",
   };
 
   return (
