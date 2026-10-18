@@ -77,13 +77,27 @@
   --color-log-surface: color-mix(in srgb, var(--color-background), black 15%);
 }
 
-/* macOS: the window is transparent with sidebar vibrancy (lib.rs). Let the
-   vibrancy show through the root and the sidebar; the content pane paints its
-   own opaque background. Onboarding keeps a solid window background. Other
+/* macOS: the window is transparent with sidebar vibrancy (lib.rs). Every
+   full-window state (loading, onboarding, model migration, previews) paints
+   the opaque window background edge to edge via html/body/#root. Only while
+   the settings layout is mounted does the root go transparent, so the
+   vibrancy shows through the sidebar; its content pane is opaque. Other
    platforms keep native decorations and an opaque sidebar. */
-:root[data-platform="macos"]:not([data-onboarding-active]),
-:root[data-platform="macos"]:not([data-onboarding-active]) body {
+html,
+body,
+#root {
+  background-color: var(--color-background);
+}
+:root[data-platform="macos"]:has(.app-sidebar),
+:root[data-platform="macos"]:has(.app-sidebar) body,
+:root[data-platform="macos"]:has(.app-sidebar) #root {
   background-color: transparent;
+}
+/* macOS: keep the onboarding Back button clear of the inset traffic lights,
+   level with them like a toolbar button. */
+:root[data-platform="macos"] .onboarding-back {
+  top: 13px;
+  inset-inline-start: 84px;
 }
 .app-sidebar {
   background-color: var(--color-sidebar);
@@ -248,20 +262,23 @@
   scrollbar-gutter: stable both-edges;
 }
 
-/* macOS - tint native overlay scrollbar thumb */
-:root[data-platform="macos"] {
-  scrollbar-color: var(--scrollbar-thumb) transparent;
-}
+/* macOS: leave scrollbars native. Styling ::-webkit-scrollbar (or
+   scrollbar-color) turns WebKit's overlay scrollbars into classic ones with a
+   visible track and a reserved gutter, so the custom scrollbar below is
+   limited to other platforms. */
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
+/* Custom Scrollbar (non-macOS) */
+:root:not([data-platform="macos"])::-webkit-scrollbar,
+:root:not([data-platform="macos"]) ::-webkit-scrollbar {
   width: 14px;
   height: 14px;
 }
-::-webkit-scrollbar-track {
+:root:not([data-platform="macos"])::-webkit-scrollbar-track,
+:root:not([data-platform="macos"]) ::-webkit-scrollbar-track {
   background: transparent;
 }
-::-webkit-scrollbar-thumb {
+:root:not([data-platform="macos"])::-webkit-scrollbar-thumb,
+:root:not([data-platform="macos"]) ::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
   border-radius: 20px;
   border: 3px solid transparent;
@@ -270,7 +287,8 @@
   background-clip: content-box;
   min-height: 32px;
 }
-::-webkit-scrollbar-thumb:hover {
+:root:not([data-platform="macos"])::-webkit-scrollbar-thumb:hover,
+:root:not([data-platform="macos"]) ::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-hover);
 }
 
